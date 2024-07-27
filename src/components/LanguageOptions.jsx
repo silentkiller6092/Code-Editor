@@ -1,7 +1,7 @@
 import { React, useState, useRef } from "react";
 import CodeEditor from "../CodeEditor";
 
-function LanguageOptions() {
+function LanguageOptions({ collapsed }) {
   const [code, setCode] = useState("");
   const [result, setResult] = useState("");
   const [language, setLanguage] = useState("javascript");
@@ -45,6 +45,7 @@ function LanguageOptions() {
         onChange={handleCodeChange}
         language={language}
         theme={"vs-dark"}
+        collapsed={collapsed}
         onEditorMount={(editor) => {
           editorRef.current = editor;
         }}

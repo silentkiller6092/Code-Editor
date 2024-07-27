@@ -6,11 +6,11 @@ import { MantineProvider } from "@mantine/core";
 import { NavbarNested } from "./components/NavbarNested";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
-
+import "./App.css";
 import LanguageOptions from "./components/LanguageOptions";
 
 function App() {
-  const [collapsed, setCollapsed] = useState(false); // Manage collapsed state manually
+  const [collapsed, setCollapsed] = useState(false);
 
   return (
     <MantineProvider defaultColorScheme="dark">
@@ -28,7 +28,7 @@ function App() {
           padding="md"
         >
           <AppShell.Header className="headerComponent">
-            <Flex justify="center" align="center" direction="row">
+            <Flex justify="left" align="center" direction="row" mt={5}>
               <Burger
                 opened={!collapsed}
                 onClick={() => setCollapsed(!collapsed)} // Toggle collapsed state
@@ -49,7 +49,10 @@ function App() {
           </AppShell.Navbar>
           <AppShell.Main>
             <Routes>
-              <Route path="/log" element={<LanguageOptions />} />
+              <Route
+                path="/code-editor"
+                element={<LanguageOptions collapsed={collapsed} />}
+              />
             </Routes>
           </AppShell.Main>
         </AppShell>

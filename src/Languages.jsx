@@ -1,6 +1,6 @@
 import React from "react";
 
-function Languages() {
+function Languages({ collapsed }) {
   return <div>Languages</div>;
 }
 

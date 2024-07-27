@@ -1,7 +1,14 @@
 import MonacoEditor from "@monaco-editor/react";
 import React, { useState, useRef } from "react";
 
-const CodeEditor = ({ code, onChange, language, theme, onEditorMount }) => {
+const CodeEditor = ({
+  code,
+  onChange,
+  language,
+  theme,
+  onEditorMount,
+  collapsed,
+}) => {
   const [isFocused, setIsFocused] = useState(false);
   const editorRef = useRef(null);
 
@@ -27,11 +34,12 @@ const CodeEditor = ({ code, onChange, language, theme, onEditorMount }) => {
       style={{
         height: "90vh",
         fontFamily: "cursive",
-        width: "80vw",
+        width: `${collapsed ? "95vw" : "80vw"}`,
         border: isFocused ? "2px solid #007ACC" : "none",
         borderRadius: "2px",
         transition: "border 0.3s ease", // Optional: Smooth transition
       }}
+      className="code-editor"
     >
       <MonacoEditor
         language={language}
