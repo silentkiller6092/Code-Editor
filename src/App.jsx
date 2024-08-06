@@ -5,10 +5,10 @@ import { AppShell, Burger } from "@mantine/core";
 import { MantineProvider } from "@mantine/core";
 import { NavbarNested } from "./components/NavbarNested";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
+
 import "./App.css";
 import LanguageOptions from "./components/LanguageOptions";
-
+import { IconBrandVscode } from "@tabler/icons-react";
 function App() {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -28,20 +28,20 @@ function App() {
           padding="md"
         >
           <AppShell.Header className="headerComponent">
-            <Flex justify="left" align="center" direction="row" mt={5}>
-              <Burger
-                opened={!collapsed}
-                onClick={() => setCollapsed(!collapsed)} // Toggle collapsed state
-                size="sm"
-                className="burger-icon" // Add a class name
-              />
-              <Text ml="xs" size="xl">
-                SIEM Solution
-              </Text>
+            <Flex justify="space-between" align="center" direction="row" mt={5}>
+              <Flex align="center">
+                <Burger
+                  opened={!collapsed}
+                  onClick={() => setCollapsed(!collapsed)} // Toggle collapsed state
+                  size="sm"
+                  className="burger-icon" // Add a class name
+                />
+                <Text ml="xs" size="xl">
+                  DevPad
+                </Text>
+              </Flex>
+              <IconBrandVscode size={50} style={{ marginRight: "10px" }} />
             </Flex>
-            <div>
-              <Header />
-            </div>
           </AppShell.Header>
 
           <AppShell.Navbar>
