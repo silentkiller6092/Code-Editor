@@ -6,8 +6,7 @@ import classes from "../Style/NavbarNested.module.css";
 
 const mockdata = [
   { label: "Overview", icon: IconGauge, link: "/" },
-  { label: "Code Editor", icon: IconGauge, link: "/log" },
-  { label: "New Project", icon: IconGauge, link: "/project" },
+  { label: "Code Editor", icon: IconGauge, link: "/code-editor" },
 ];
 
 export function NavbarNested() {

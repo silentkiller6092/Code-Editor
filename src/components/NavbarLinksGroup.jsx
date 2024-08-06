@@ -44,7 +44,7 @@ export function LinksGroup({
             </ThemeIcon>
             <Box ml="md">{label}</Box>
           </Box>
-          {hasLinks && (
+          {/* {hasLinks && (
             <IconChevronRight
               className={classes.chevron}
               stroke={1.5}
@@ -54,7 +54,7 @@ export function LinksGroup({
                 transform: opened ? "rotate(-90deg)" : "none",
               }}
             />
-          )}
+          )} */}
         </Group>
       </UnstyledButton>
       {hasLinks ? <Collapse in={opened}>{items}</Collapse> : null}

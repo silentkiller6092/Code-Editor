@@ -1,9 +1,31 @@
 import MonacoEditor from "@monaco-editor/react";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
-const CodeEditor = ({ code, onChange, language, theme, onEditorMount }) => {
-  const [isFocused, setIsFocused] = useState(false);
+const CodeEditor = ({
+  code,
+  onChange,
+  language,
+  theme,
+  onEditorMount,
+  collapsed,
+  isFocused,
+  onShiftEnter,
+}) => {
   const editorRef = useRef(null);
+
+  useEffect(() => {
+    const handleKeydown = (event) => {
+      if (event.shiftKey && event.key === "Enter" && isFocused) {
+        event.preventDefault();
+        onShiftEnter();
+      }
+    };
+    window.addEventListener("keydown", handleKeydown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeydown);
+    };
+  }, [isFocused, onShiftEnter]);
 
   // Handle editor changes
   const handleEditorChange = (value) => {
@@ -12,14 +34,16 @@ const CodeEditor = ({ code, onChange, language, theme, onEditorMount }) => {
     }
   };
 
-  // Handle editor focus
   const handleEditorFocus = () => {
-    setIsFocused(true);
+    if (onEditorMount) {
+      onEditorMount(true);
+    }
   };
 
-  // Handle editor blur
   const handleEditorBlur = () => {
-    setIsFocused(false);
+    if (onEditorMount) {
+      onEditorMount(false);
+    }
   };
 
   return (
@@ -27,11 +51,12 @@ const CodeEditor = ({ code, onChange, language, theme, onEditorMount }) => {
       style={{
         height: "90vh",
         fontFamily: "cursive",
-        width: "80vw",
-        border: isFocused ? "2px solid #007ACC" : "none",
-        borderRadius: "2px",
-        transition: "border 0.3s ease", // Optional: Smooth transition
+        width: `${collapsed ? "65vw" : "45vw"}`,
+        border: isFocused ? "1px solid #c09eff" : "none",
+
+        transition: "border 0.3s ease",
       }}
+      className="code-editor"
     >
       <MonacoEditor
         language={language}
@@ -52,12 +77,8 @@ const CodeEditor = ({ code, onChange, language, theme, onEditorMount }) => {
         }}
         onMount={(editor, monaco) => {
           editorRef.current = editor;
-          // Attach focus and blur event listeners
           editor.onDidFocusEditorText(handleEditorFocus);
           editor.onDidBlurEditorText(handleEditorBlur);
-          if (onEditorMount) {
-            onEditorMount(editor, monaco);
-          }
         }}
       />
     </div>
